@@ -1,0 +1,42 @@
+using System.Data.SqlClient;
+
+namespace second_project
+{
+    public partial class Form1 : Form
+    {
+        SqlConnection con = new SqlConnection(
+            @"Data Source= .\SQLEXPRESS; 
+            Initial Catalog= bit3rdsem;
+            user id =sa ; 
+            password =kist@123;");
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_click(object sender, EventArgs e)
+        {
+            try
+            {
+                con.Open();
+                string query = "write update query";
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.ExecuteNonQuery();
+
+
+                //SqlCommand cmd = con.CreateCommand(); //next way
+                //cmd.CommandText = query;
+                //cmd.ExecuteNonQuery();
+
+                MessageBox.Show("update successfully");
+                con.Close();
+
+            }
+            catch (Exception ex)
+
+            {
+                MessageBox.Show("Error: " + ex.InnerException);
+            }
+        }
+    }
+}
